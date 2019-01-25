@@ -12,5 +12,6 @@
 */
 
 Route::get('/', 'CalendarController@index');
-Route::resource('events', 'EventController');
-Route::resource('conferences', 'ConferenceController');
+
+//Route::resource('events', 'EventController');
+//Route::resource('conferences', 'ConferenceController');

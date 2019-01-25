@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->string('venue', 64);
             $table->dateTime('start_time');
             $table->dateTime('end_time');
-            $table->string('url', 100);
+            $table->string('url', 256);
             $table->text('blurb');
             $table->timestamps();
         });

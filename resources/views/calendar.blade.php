@@ -7,6 +7,6 @@
     <title>Miranj Calendar Exercise</title>
 </head>
 <body>
-TEST
+TESTING
 </body>
 </html>
