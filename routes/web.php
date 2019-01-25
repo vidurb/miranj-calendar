@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('calendar');
-});
-
+Route::get('/', 'CalendarController@index');
 Route::resource('events', 'EventController');
 Route::resource('conferences', 'ConferenceController');
