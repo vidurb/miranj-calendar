@@ -12,5 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('calendar');
 });
+
+Route::resource('events', 'EventController');
+Route::resource('conferences', 'ConferenceController');

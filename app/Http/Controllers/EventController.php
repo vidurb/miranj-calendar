@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Illuminate\Http\Request;
 
 /**
@@ -11,4 +12,10 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     //
+    /**
+     * @return Event[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function events() {
+        return Event::all();
+    }
 }

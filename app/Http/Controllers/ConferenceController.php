@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Conference;
 use Illuminate\Http\Request;
 
 /**
@@ -11,4 +12,10 @@ use Illuminate\Http\Request;
 class ConferenceController extends Controller
 {
     //
+    /**
+     * @return Conference[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function conferences() {
+        return Conference::all();
+    }
 }
