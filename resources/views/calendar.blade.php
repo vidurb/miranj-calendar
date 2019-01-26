@@ -16,7 +16,7 @@
         <h1 class="d-block d-md-none text-right display-3">HasGeek Calendar</h1>
     </div>
     <div class="container">
-        <div class="row">
+        <div class="row no-gutters">
             <div class="d-none d-md-block col-md-2">
                 <div class="index__wrapper min-vh-100">
                     <div class="index min-vh-100 d-flex flex-column justify-content-around">
