@@ -9,7 +9,7 @@
             <h2 class="mb-0">{{ $event->start_time->format('d') }}
                 <br>{{ $event->start_time->format('m') }}</h2>
         </div>
-    {{--Print starting and ending dates if events spans multiple days--}}
+        {{--Print starting and ending dates if events spans multiple days--}}
     @else
         <div class="event__datebox w-15 text-center align-self-stretch d-flex flex-column justify-content-around text-light">
             <h2 class="mb-0 ">{{ $event->start_time->format('d') }}<br>{{ $event->start_time->format('m') }}</h2>
@@ -21,8 +21,10 @@
         @if(!empty($event->banner))
             <img src="{{ $event->banner }}" alt="A decorative banner image for the event"
                  class="img-fluid w-100">
+            <h3 class="p-2">{{ $event->title }}</h3>
+        @else
+            <h3 class="p-2 text-light event__title">{{ $event->title }}</h3>
         @endif
-        <h3 class="p-2">{{ $event->title }}</h3>
         <div class="d-flex justify-content-between w-100 px-2">
             <h6>{{ $event->venue }}<br><span class="text-muted text-wrap">{{ $event->city }}</span></h6>
             <h6 class="text-right text-wrap">{{ $event->start_time->format('h:i l, jS F') }}<br>
