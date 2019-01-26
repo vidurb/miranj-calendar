@@ -10,6 +10,8 @@ Make sure all prerequisites for Laravel are set up and operating correctly as pe
 
 Clone this project into a convenient location on your terminal.
 
+Run `composer update` from the root of the project.
+
 Copy the contents of the `.env.example` file into a new file called `.env`. 
 Both files should be located in the root of the project.
 
