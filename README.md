@@ -10,8 +10,6 @@ Make sure all prerequisites for Laravel are set up and operating correctly as pe
 
 Clone this project into a convenient location on your terminal.
 
-Run `composer update` from the root of the project.
-
 Copy the contents of the `.env.example` file into a new file called `.env`. 
 Both files should be located in the root of the project.
 
@@ -21,6 +19,21 @@ Symlink the `public` folder into your server's webroot and set correct permissio
 the `bootstrap/cache` and `storage` folders should be writeable by the webserver user. 
 Alternatively, you may wish to use Laravel Valet to run this project, 
 in which case you do not need to symlink the public folder and may refer to the Laravel Valet documentation.
+
+Run `composer update` from the root of the project.
+
+Run `npm install` from the root of the project.
+
+Run `npm run production` from the root of the project.
+
+Add the following code to the `App\Event` and `App\Conference` classes:
+
+`    
+public function getDateFormat()
+     {
+         return 'Y-m-d H:i:s';
+     }
+`
 
 Run the command `php artisan migrate` to set up the database tables.
 
