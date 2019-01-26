@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
@@ -13,8 +11,16 @@ class CalendarController extends Controller
      */
     public function index()
     {
-//        $conferences = ConferenceController::conferences();
-//        return view('calendar', ['events' => $events, 'conferences' => $conferences]);
-        return view('calendar');
+        $combined_events = $this->combineCalendarEvents();
+        $calendar_range = $this->calculateCalendarRange($combined_events);
+        return view('calendar', ['combined_events' => $combined_events, 'calendar_range' => $calendar_range]);
+    }
+    public function combineCalendarEvents() {
+        $conferences = ConferenceController::conferences();
+        $events = EventController::events();
+        return $events->merge($conferences)->sortBy('start_time');
+    }
+    public function calculateCalendarRange(\Illuminate\Database\Eloquent\Collection $combined_events) {
+        return \Carbon\CarbonPeriod::create($combined_events->first()->start_time, $combined_events->last()->start_time, '1 month');
     }
 }
