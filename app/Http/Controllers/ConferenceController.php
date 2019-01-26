@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Conference;
-use Illuminate\Http\Request;
 
 /**
  * Class ConferenceController
@@ -16,6 +15,6 @@ class ConferenceController extends Controller
      * @return Conference[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function conferences() {
-        return Conference::all()->sortBy('start_time');
+        return Conference::orderBy('start_time', 'desc')->get();
     }
 }

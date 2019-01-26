@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Event;
-use Illuminate\Http\Request;
 
 /**
  * Class EventController
@@ -15,7 +14,7 @@ class EventController extends Controller
     /**
      * @return Event[]|\Illuminate\Database\Eloquent\Collection
      */
-//    public static function events() {
-//        return Event::all()->sortBy('start_time');
-//    }
+    public static function events() {
+        return Event::orderBy('start_time', 'desc')->get();
+    }
 }
