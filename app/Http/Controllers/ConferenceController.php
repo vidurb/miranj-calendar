@@ -15,6 +15,6 @@ class ConferenceController extends Controller
      * @return Conference[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function conferences() {
-        return Conference::orderBy('start_time', 'desc')->get();
+        return Conference::all();
     }
 }

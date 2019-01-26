@@ -15,12 +15,23 @@ class CalendarController extends Controller
         $calendar_range = $this->calculateCalendarRange($combined_events);
         return view('calendar', ['combined_events' => $combined_events, 'calendar_range' => $calendar_range]);
     }
-    public function combineCalendarEvents() {
+
+    public function combineCalendarEvents()
+    {
         $conferences = ConferenceController::conferences();
         $events = EventController::events();
-        return $events->merge($conferences)->sortBy('start_time');
+        $combined_events = collect();
+        foreach ($conferences as $conference) {
+            $combined_events->push($conference);
+        }
+        foreach($events as $event) {
+            $combined_events->push($event);
+        }
+        return $combined_events->sortByDesc('start_time');
     }
-    public function calculateCalendarRange(\Illuminate\Database\Eloquent\Collection $combined_events) {
-        return \Carbon\CarbonPeriod::create($combined_events->first()->start_time, $combined_events->last()->start_time, '1 month');
+
+    public function calculateCalendarRange(\Illuminate\Support\Collection $combined_events)
+    {
+        return \Carbon\CarbonPeriod::create($combined_events->first()->start_time, $combined_events->last()->start_time, '1 month')->invertDateInterval();
     }
 }

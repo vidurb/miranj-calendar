@@ -15,6 +15,6 @@ class EventController extends Controller
      * @return Event[]|\Illuminate\Database\Eloquent\Collection
      */
     public static function events() {
-        return Event::orderBy('start_time', 'desc')->get();
+        return Event::all();
     }
 }
