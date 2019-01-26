@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
 use App\Event;
 use App\Conference;
@@ -13,28 +12,31 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
+     * Calls the seeders for each model.
      * @return void
      */
     public function run()
     {
-         $this->call(EventSeeder::class);
+        $this->call(EventSeeder::class);
         $this->call(ConferenceSeeder::class);
     }
 }
 
 /**
  * Class EventSeeder
- * Seeds event table with events from statis dataset (events.yml)
+ * Seeds database with events from HasGeek's GitHub repo
  */
 class EventSeeder extends Seeder {
-
     /**
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * Gets content from URL, parses using Symfony's YAML component, and seeds the database with each entry.
+     * The string modification on line 38 is in order to correct a syntax error in the yaml file that causes an error
+     *  A single entry is missing the last zero in one of its timestamps
      */
     public function run()
     {
-        $eventsYaml = Yaml::parse(Storage::disk('public')->get('events.yml'));
+        $eventsYaml = file_get_contents('https://raw.githubusercontent.com/hasgeek/events/master/_data/events.yml');
+        $eventsYaml = str_replace("end_time: 2017-10-27 21:0","end_time: 2017-10-27 21:00", $eventsYaml);
+        $eventsYaml = Yaml::parse($eventsYaml);
         foreach($eventsYaml as $event) {
             Event::create([
                 'name' => $event['name'],
@@ -52,16 +54,16 @@ class EventSeeder extends Seeder {
 
 /**
  * Class ConferenceSeeder
- * Seeds conference table with static dataset in conferences.yml
+ * Seeds database with conferences from HasGeek's GitHub repo
  */
 class ConferenceSeeder extends Seeder {
-
     /**
-     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+     * Gets content from URL, parses using Symfony's YAML component, and seeds the database with each entry
      */
     public function run()
     {
-        $conferencesYaml = Yaml::parse(Storage::disk('public')->get('conferences.yml'));
+        $conferencesYaml = file_get_contents('https://raw.githubusercontent.com/hasgeek/events/master/_data/conferences.yml');
+        $conferencesYaml = Yaml::parse($conferencesYaml);
         foreach($conferencesYaml as $conference) {
             Conference::create([
                 'name' => $conference['name'],
