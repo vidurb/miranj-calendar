@@ -30,15 +30,6 @@ Run the command `php artisan migrate` to set up the database tables.
 
 Run the command `php artisan db:seed` to seed the database with data from HasGeek's repo.
 
-Add the following code to the `App\Event` and `App\Conference` classes:
-
-`    
-public function getDateFormat()
-     {
-         return 'Y-m-d H:i:s';
-     }
-`
-
 The app should be ready to run. Navigate to the URL mapped to the project - 
 it may be relative to the server's primary URL depending on how you symlinked the `public` folder.
 Alternatively, if you choose to use Laravel Valet, refer to it's documentation. 
