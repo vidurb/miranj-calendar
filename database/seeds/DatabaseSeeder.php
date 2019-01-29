@@ -35,7 +35,9 @@ class EventSeeder extends Seeder {
     public function run()
     {
         $eventsYaml = file_get_contents('https://raw.githubusercontent.com/hasgeek/events/master/_data/events.yml');
-        $eventsYaml = str_replace("end_time: 2017-10-27 21:0","end_time: 2017-10-27 21:00", $eventsYaml);
+        $eventsYaml = preg_replace('/\d{4}-\d{2}-\d{2} \d{2}:\d{2}/', '$0:00', $eventsYaml);
+        $eventsYaml = preg_replace('/\d{4}-\d{2}-\d{2} \d{2}:\d{1}\b/', '${0}0:00', $eventsYaml);
+        $eventsYaml = preg_replace('/(\d{4}-\d{2}-\d{2}) (\d{1}:\d{2})/', '$1 0$2:00', $eventsYaml);
         $eventsYaml = Yaml::parse($eventsYaml);
         foreach($eventsYaml as $event) {
             Event::create([
@@ -63,6 +65,7 @@ class ConferenceSeeder extends Seeder {
     public function run()
     {
         $conferencesYaml = file_get_contents('https://raw.githubusercontent.com/hasgeek/events/master/_data/conferences.yml');
+        $conferencesYaml = preg_replace('/\d{4}-\d{2}-\d{2}/', '$0 00:00:00', $conferencesYaml);
         $conferencesYaml = Yaml::parse($conferencesYaml);
         foreach($conferencesYaml as $conference) {
             Conference::create([
