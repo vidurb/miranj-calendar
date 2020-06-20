@@ -1,5 +1,3 @@
-# Warning: Do not use this code for anything, it is not being maintained and therefore has active security vulnerabilities.
-
 # Event Calendar Task
 by Vidur Butalia for Miranj
 
